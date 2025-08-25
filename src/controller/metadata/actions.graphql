@@ -1,0 +1,41 @@
+type Query {
+  me: Me!
+}
+
+type Mutation {
+  sign_up(
+    form: SignUpInput!
+  ): SignUpOutPut
+}
+
+type Mutation {
+  sync_social_account(
+    form: SyncSocialAccountInput!
+  ): MessageResponse
+}
+
+input SignUpInput {
+  email: String!
+  password: String!
+  display_name: String!
+}
+
+input SyncSocialAccountInput {
+  token: String!
+}
+
+type Me {
+  id: String!
+  display_name: String!
+  email: String!
+  role: String!
+}
+
+type SignUpOutPut {
+  code: String!
+}
+
+type MessageResponse {
+  message: String!
+}
+

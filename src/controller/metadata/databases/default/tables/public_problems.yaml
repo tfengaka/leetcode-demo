@@ -1,0 +1,55 @@
+table:
+  name: problems
+  schema: public
+array_relationships:
+  - name: test_cases
+    using:
+      foreign_key_constraint_on:
+        column: problem_id
+        table:
+          name: test_cases
+          schema: public
+  - name: user_submissions
+    using:
+      foreign_key_constraint_on:
+        column: problem_id
+        table:
+          name: user_submissions
+          schema: public
+select_permissions:
+  - role: student
+    permission:
+      columns:
+        - code
+        - difficulty
+        - title
+        - description
+        - created_at
+        - updated_at
+        - id
+      filter: {}
+      allow_aggregations: true
+    comment: ""
+  - role: teacher
+    permission:
+      columns:
+        - code
+        - difficulty
+        - title
+        - description
+        - created_at
+        - updated_at
+        - id
+      filter: {}
+      allow_aggregations: true
+    comment: ""
+update_permissions:
+  - role: teacher
+    permission:
+      columns:
+        - description
+        - difficulty
+        - title
+      filter: {}
+      check: null
+    comment: ""

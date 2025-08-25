@@ -1,0 +1,35 @@
+actions:
+  - name: me
+    definition:
+      kind: ""
+      handler: '{{API_ENDPOINT}}/actions'
+      forward_client_headers: true
+    permissions:
+      - role: teacher
+      - role: student
+  - name: sign_up
+    definition:
+      kind: synchronous
+      handler: '{{API_ENDPOINT}}/actions'
+      forward_client_headers: true
+    permissions:
+      - role: anonymous
+  - name: sync_social_account
+    definition:
+      kind: synchronous
+      handler: '{{API_ENDPOINT}}/actions'
+      forward_client_headers: true
+    permissions:
+      - role: teacher
+      - role: student
+      - role: anonymous
+custom_types:
+  enums: []
+  input_objects:
+    - name: SignUpInput
+    - name: SyncSocialAccountInput
+  objects:
+    - name: Me
+    - name: SignUpOutPut
+    - name: MessageResponse
+  scalars: []

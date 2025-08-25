@@ -1,0 +1,6 @@
+- "!include public_languages.yaml"
+- "!include public_problems.yaml"
+- "!include public_submissions.yaml"
+- "!include public_test_cases.yaml"
+- "!include public_user_submissions.yaml"
+- "!include public_users.yaml"

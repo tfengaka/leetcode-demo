@@ -1,0 +1,11 @@
+table:
+  name: submissions
+  schema: public
+array_relationships:
+  - name: user_submissions
+    using:
+      foreign_key_constraint_on:
+        column: submission_id
+        table:
+          name: user_submissions
+          schema: public

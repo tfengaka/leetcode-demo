@@ -1,0 +1,35 @@
+#!make
+include .env
+
+PROJECT=judge0
+MIGRATION_DIR=src/controller
+
+dev: 
+	docker-compose -f docker-compose.dev.yaml -f docker-compose.worker.yaml -p ${PROJECT} up -d ${SERVICE}
+
+down: 
+	docker-compose -f docker-compose.dev.yaml -f docker-compose.worker.yaml -p ${PROJECT} down ${SERVICE}
+
+restart:
+	docker-compose -p ${PROJECT} restart ${SERVICE}
+
+clean: 
+	docker-compose -p ${PROJECT} down --remove-orphans -v
+
+console:
+	cd ${MIGRATION_DIR} && hasura console --admin-secret ${HASURA_GRAPHQL_ADMIN_SECRET}
+
+migrate:
+	cd ${MIGRATION_DIR} && hasura migrate apply --admin-secret ${HASURA_GRAPHQL_ADMIN_SECRET} --all-databases && hasura metadata apply --admin-secret ${HASURA_GRAPHQL_ADMIN_SECRET}
+
+metadata-reload:
+	cd ${MIGRATION_DIR} && hasura metadata reload --admin-secret ${HASURA_GRAPHQL_ADMIN_SECRET}
+
+seed:
+	cd ${MIGRATION_DIR} && hasura seed apply
+
+metadata-export:
+	cd ${MIGRATION_DIR} && hasura metadata export --admin-secret ${HASURA_GRAPHQL_ADMIN_SECRET}
+
+%:
+	@echo "Done"

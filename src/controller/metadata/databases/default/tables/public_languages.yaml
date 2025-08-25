@@ -1,0 +1,37 @@
+table:
+  name: languages
+  schema: public
+select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+        - is_archived
+        - compile_cmd
+        - name
+        - run_cmd
+        - source_file
+        - id
+      filter: {}
+    comment: ""
+  - role: student
+    permission:
+      columns:
+        - is_archived
+        - compile_cmd
+        - name
+        - run_cmd
+        - source_file
+        - id
+      filter: {}
+    comment: ""
+  - role: teacher
+    permission:
+      columns:
+        - is_archived
+        - compile_cmd
+        - name
+        - run_cmd
+        - source_file
+        - id
+      filter: {}
+    comment: ""

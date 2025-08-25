@@ -1,0 +1,20 @@
+query GetMe {
+  me {
+    id
+    email
+    role
+    display_name
+  }
+}
+
+mutation SignUp($form: SignUpInput!) {
+  sign_up(form: $form) {
+    code
+  }
+}
+
+mutation SyncSocialAccount($form: SyncSocialAccountInput!) {
+  sync_social_account(form: $form) {
+    message
+  }
+}
