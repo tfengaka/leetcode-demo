@@ -2,13 +2,13 @@ import { PasswordInput } from '@/components/common/password-input';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useSyncSocialAccountMutation } from '@/graphql/generated';
+import { useSyncSocialAccountMutation } from '@/graphql';
 import { useFirebaseAuthAction } from '@/hooks/useFirebaseAuth';
 import { firebaseAuth } from '@/lib/firebase';
 import { cn } from '@/lib/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { IconBrandGoogleFilled, IconBrandWindowsFilled } from '@tabler/icons-react';
-import { useNavigate } from '@tanstack/react-router';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -22,6 +22,7 @@ const formSchema = yup
 
 export default function SignInForm({ className, ...props }: React.HTMLAttributes<HTMLFormElement>) {
   const navigate = useNavigate();
+  const searchParams = useSearch({ from: '/_auth/sign-in' });
   const { loading, signInWithPassword, signInWithGoogle } = useFirebaseAuthAction(firebaseAuth);
   const [syncSocialAccount] = useSyncSocialAccountMutation();
 
@@ -32,7 +33,7 @@ export default function SignInForm({ className, ...props }: React.HTMLAttributes
 
   function onSubmit(data: yup.InferType<typeof formSchema>) {
     signInWithPassword(data.email, data.password, () => {
-      navigate({ to: '/' });
+      navigate({ to: searchParams?.redirect || '/' });
     });
   }
 

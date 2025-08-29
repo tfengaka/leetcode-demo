@@ -1,5 +1,7 @@
+import { Role } from '@/enum/common.enum';
 import { cn } from '@/lib/utils';
 import { LayoutProvider } from '@/providers/layout-provider';
+import useAuthStore from '@/store/useAuthStore';
 import { IconCode } from '@tabler/icons-react';
 import { Outlet, useNavigate } from '@tanstack/react-router';
 import { useEffect } from 'react';
@@ -10,10 +12,13 @@ import { NavGroup } from './nav-group';
 
 export default function ManageAppLayout() {
   const navigate = useNavigate();
+  const { user } = useAuthStore();
 
   useEffect(() => {
-    navigate({ to: '/manage/dashboard' });
-  }, []);
+    if (user && ![Role.Teacher, Role.Admin].includes(user.role as Role)) {
+      navigate({ to: '/403' });
+    }
+  }, [user]);
 
   return (
     <SidebarProvider defaultOpen={true}>

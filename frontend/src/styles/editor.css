@@ -1,0 +1,66 @@
+/* GitHub Dark Dimmed Theme for TipTap Editor Code Blocks */
+
+/* Syntax highlighting colors following your hljs pattern */
+/* Comments and quotes */
+.hljs-comment,
+.hljs-quote {
+  color: #616161;
+}
+
+/* Variables, tags, attributes, etc. */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-attribute,
+.hljs-tag,
+.hljs-regexp,
+.hljs-link,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+  color: #f98181;
+}
+
+/* Numbers, meta, built-ins, etc. */
+.hljs-number,
+.hljs-meta,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params {
+  color: #fbbc88;
+}
+
+/* Strings, symbols, bullets */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet {
+  color: #b9f18d;
+}
+
+/* Titles and sections */
+.hljs-title,
+.hljs-section {
+  color: #faf594;
+}
+
+/* Keywords and selector tags */
+.hljs-keyword,
+.hljs-selector-tag {
+  color: #70cff8;
+}
+
+/* Text styling */
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: 700;
+}
+
+/* Selection highlighting in code blocks */
+.ProseMirror pre code::selection,
+.ProseMirror pre code ::-moz-selection {
+  background-color: #264466;
+}

@@ -1,20 +1,25 @@
 import SwirlingSpinner from '@/components/common/swirling-spinner';
-import { useGetMeLazyQuery } from '@/graphql/generated';
+import { useGetMeLazyQuery } from '@/graphql';
 import useAuthStore from '@/store/useAuthStore';
-import { GeneralError } from '@/views/errors/general-error';
 import React, { useEffect } from 'react';
 
 function AuthProvider({ children }: { children: React.ReactNode }) {
-  const { setUser, idToken } = useAuthStore();
-  const [getMe, { loading, error }] = useGetMeLazyQuery();
+  const { setUser, idToken, setLoading, loading } = useAuthStore();
+  const [getMe] = useGetMeLazyQuery();
 
   useEffect(() => {
     if (idToken) {
-      getMe().then(({ data }) => {
-        if (data && data.me) {
-          setUser(data.me);
-        }
-      });
+      getMe()
+        .then(({ data }) => {
+          if (data && data.me) {
+            setUser(data.me);
+          }
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
     }
   }, [idToken]);
 
@@ -27,10 +32,6 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
         </div>
       </div>
     );
-
-  if (error) {
-    return <GeneralError minimal />;
-  }
 
   return children;
 }

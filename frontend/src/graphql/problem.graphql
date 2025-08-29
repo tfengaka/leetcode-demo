@@ -1,0 +1,45 @@
+query GetProblems($where: problems_bool_exp, $limit: Int, $offset: Int, $orderBy: [problems_order_by!]) {
+  problems(where: $where, limit: $limit, offset: $offset, order_by: $orderBy) {
+    id
+    title
+    code
+    difficulty
+    created_at
+  }
+}
+
+query GetProblemPagination($where: problems_bool_exp) {
+  pagination: problems_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}
+
+query GetProblemByPk($id: uuid!) {
+  problem: problems_by_pk(id: $id) {
+    id
+    code
+    title
+    difficulty
+    descriptions
+    test_cases {
+      id
+      input
+      expected_output
+      is_sample
+    }
+  }
+}
+
+mutation CreateProblem($object: problems_insert_input!) {
+  insert_problems_one(object: $object) {
+    id
+  }
+}
+
+mutation UpdateProblemByPk($id: uuid!, $form: problems_set_input!) {
+  update_problems_by_pk(pk_columns: { id: $id }, _set: $form) {
+    id
+  }
+}

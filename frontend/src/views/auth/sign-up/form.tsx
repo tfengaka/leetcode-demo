@@ -2,10 +2,9 @@ import { PasswordInput } from '@/components/common/password-input';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useSignUpMutation } from '@/graphql/generated';
+import { useSignUpMutation } from '@/graphql';
 import { cn } from '@/lib/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { IconBrandGoogleFilled, IconBrandWindowsFilled } from '@tabler/icons-react';
 import { useNavigate } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -50,7 +49,7 @@ export default function SignUpForm({ className, ...props }: React.HTMLAttributes
     })
       .then(() => {
         toast.success('Account created successfully! Please check your email to verify your account.');
-        navigate({ to: '/sign-in' });
+        navigate({ to: '/sign-in', search: { redirect: '' } });
       })
       .catch((error) => {
         if (error.message.includes('email already exists')) {

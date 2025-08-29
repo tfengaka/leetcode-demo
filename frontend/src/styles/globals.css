@@ -3,6 +3,13 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@font-face {
+  font-family: 'SFMono';
+  src: url('../fonts/SFMono.woff2') format('WOFF2');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --radius: 0.625rem;
   --header-height: 3rem;
@@ -53,10 +60,10 @@
   --muted: oklch(0.279 0.041 260.031);
   --muted-foreground: oklch(0.704 0.04 256.788);
   --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
+  --accent-foreground: #f8fafc;
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
+  --input: rgba(255, 255, 255, 0.15);
   --ring: oklch(0.551 0.027 264.364);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
@@ -75,6 +82,7 @@
 
 @theme inline {
   --font-display: 'Inter', 'sans-serif';
+  --font-mono: 'SFMono', 'monospace';
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -117,7 +125,83 @@
   * {
     @apply font-display border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .tiptap.ProseMirror {
+    @apply p-2 size-full overflow-y-auto border border-[var(--border)] border-t-0 rounded-tl-none rounded-br-[var(--radius)] rounded-tr-none rounded-bl-[var(--radius)] focus-visible:outline-0 min-h-40;
+  }
+
+  .tiptap.ProseMirror[contenteditable='false'] {
+    @apply border-none bg-transparent outline-none p-0 m-0;
+  }
+
+  .tiptap h1 {
+    @apply text-3xl font-bold;
+  }
+
+  .tiptap h2 {
+    @apply text-2xl font-bold;
+  }
+
+  .tiptap h3 {
+    @apply text-xl font-bold;
+  }
+  .tiptap h4 {
+    @apply text-lg font-bold;
+  }
+  .tiptap h5 {
+    @apply text-base font-bold;
+  }
+  .tiptap h6 {
+    @apply font-bold;
+  }
+
+  .tiptap span,
+  .tiptap p,
+  .tiptap h6 {
+    @apply text-sm;
+  }
+
+  code > * {
+    @apply !font-mono !text-sm;
+  }
+
+  .tiptap code {
+    @apply bg-muted text-sm font-mono rounded-sm overflow-x-auto px-0.5 py-0.5;
+  }
+
+  .tiptap > pre {
+    @apply bg-[#141A21] text-[#f8fafc] font-mono text-sm rounded-sm p-3 my-2 overflow-x-auto;
+    code {
+      @apply bg-inherit font-mono text-inherit px-0;
+    }
+  }
+
+  .tiptap blockquote {
+    @apply border-l-3 border-primary pl-2 italic text-muted-foreground py-1.5;
+
+    p {
+      @apply !text-lg;
+    }
+  }
+
+  .tiptap ul {
+    @apply list-disc pl-6 my-2 space-y-2;
+  }
+
+  .tiptap ol {
+    @apply list-decimal pl-6 my-2 space-y-2;
+  }
+
+  .tiptap ul[data-type='taskList'] {
+    @apply list-none pl-0 my-2 space-y-1;
+    li {
+      @apply flex items-baseline gap-2;
+    }
   }
 }

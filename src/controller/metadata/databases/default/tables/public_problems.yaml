@@ -23,7 +23,7 @@ select_permissions:
         - code
         - difficulty
         - title
-        - description
+        - descriptions
         - created_at
         - updated_at
         - id
@@ -36,7 +36,7 @@ select_permissions:
         - code
         - difficulty
         - title
-        - description
+        - descriptions
         - created_at
         - updated_at
         - id
@@ -47,7 +47,7 @@ update_permissions:
   - role: teacher
     permission:
       columns:
-        - description
+        - descriptions
         - difficulty
         - title
       filter: {}

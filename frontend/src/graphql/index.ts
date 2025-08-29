@@ -16,6 +16,7 @@ export type Scalars = {
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
   bytea: { input: any; output: any; }
+  jsonb: { input: any; output: any; }
   numeric: { input: any; output: any; }
   timestamp: { input: any; output: any; }
   timestamptz: { input: any; output: any; }
@@ -49,7 +50,6 @@ export type Int_Comparison_Exp = {
 };
 
 export type Me = {
-  __typename?: 'Me';
   display_name: Scalars['String']['output'];
   email: Scalars['String']['output'];
   id: Scalars['String']['output'];
@@ -57,7 +57,6 @@ export type Me = {
 };
 
 export type MessageResponse = {
-  __typename?: 'MessageResponse';
   message: Scalars['String']['output'];
 };
 
@@ -68,7 +67,6 @@ export type SignUpInput = {
 };
 
 export type SignUpOutPut = {
-  __typename?: 'SignUpOutPut';
   code: Scalars['String']['output'];
 };
 
@@ -130,9 +128,36 @@ export enum Cursor_Ordering {
   Desc = 'DESC'
 }
 
+export type Jsonb_Cast_Exp = {
+  String?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'. */
+export type Jsonb_Comparison_Exp = {
+  _cast?: InputMaybe<Jsonb_Cast_Exp>;
+  /** is the column contained in the given json value */
+  _contained_in?: InputMaybe<Scalars['jsonb']['input']>;
+  /** does the column contain the given json value at the top level */
+  _contains?: InputMaybe<Scalars['jsonb']['input']>;
+  _eq?: InputMaybe<Scalars['jsonb']['input']>;
+  _gt?: InputMaybe<Scalars['jsonb']['input']>;
+  _gte?: InputMaybe<Scalars['jsonb']['input']>;
+  /** does the string exist as a top-level key in the column */
+  _has_key?: InputMaybe<Scalars['String']['input']>;
+  /** do all of these strings exist as top-level keys in the column */
+  _has_keys_all?: InputMaybe<Array<Scalars['String']['input']>>;
+  /** do any of these strings exist as top-level keys in the column */
+  _has_keys_any?: InputMaybe<Array<Scalars['String']['input']>>;
+  _in?: InputMaybe<Array<Scalars['jsonb']['input']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']['input']>;
+  _lt?: InputMaybe<Scalars['jsonb']['input']>;
+  _lte?: InputMaybe<Scalars['jsonb']['input']>;
+  _neq?: InputMaybe<Scalars['jsonb']['input']>;
+  _nin?: InputMaybe<Array<Scalars['jsonb']['input']>>;
+};
+
 /** columns and relationships of "languages" */
 export type Languages = {
-  __typename?: 'languages';
   compile_cmd?: Maybe<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
   is_archived?: Maybe<Scalars['Boolean']['output']>;
@@ -143,14 +168,12 @@ export type Languages = {
 
 /** aggregated selection of "languages" */
 export type Languages_Aggregate = {
-  __typename?: 'languages_aggregate';
   aggregate?: Maybe<Languages_Aggregate_Fields>;
   nodes: Array<Languages>;
 };
 
 /** aggregate fields of "languages" */
 export type Languages_Aggregate_Fields = {
-  __typename?: 'languages_aggregate_fields';
   avg?: Maybe<Languages_Avg_Fields>;
   count: Scalars['Int']['output'];
   max?: Maybe<Languages_Max_Fields>;
@@ -173,7 +196,6 @@ export type Languages_Aggregate_FieldsCountArgs = {
 
 /** aggregate avg on columns */
 export type Languages_Avg_Fields = {
-  __typename?: 'languages_avg_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -213,7 +235,6 @@ export type Languages_Insert_Input = {
 
 /** aggregate max on columns */
 export type Languages_Max_Fields = {
-  __typename?: 'languages_max_fields';
   compile_cmd?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   name?: Maybe<Scalars['String']['output']>;
@@ -223,7 +244,6 @@ export type Languages_Max_Fields = {
 
 /** aggregate min on columns */
 export type Languages_Min_Fields = {
-  __typename?: 'languages_min_fields';
   compile_cmd?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['Int']['output']>;
   name?: Maybe<Scalars['String']['output']>;
@@ -233,7 +253,6 @@ export type Languages_Min_Fields = {
 
 /** response of any mutation on the table "languages" */
 export type Languages_Mutation_Response = {
-  __typename?: 'languages_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
@@ -290,19 +309,16 @@ export type Languages_Set_Input = {
 
 /** aggregate stddev on columns */
 export type Languages_Stddev_Fields = {
-  __typename?: 'languages_stddev_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate stddev_pop on columns */
 export type Languages_Stddev_Pop_Fields = {
-  __typename?: 'languages_stddev_pop_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate stddev_samp on columns */
 export type Languages_Stddev_Samp_Fields = {
-  __typename?: 'languages_stddev_samp_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -326,7 +342,6 @@ export type Languages_Stream_Cursor_Value_Input = {
 
 /** aggregate sum on columns */
 export type Languages_Sum_Fields = {
-  __typename?: 'languages_sum_fields';
   id?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -357,25 +372,21 @@ export type Languages_Updates = {
 
 /** aggregate var_pop on columns */
 export type Languages_Var_Pop_Fields = {
-  __typename?: 'languages_var_pop_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate var_samp on columns */
 export type Languages_Var_Samp_Fields = {
-  __typename?: 'languages_var_samp_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** aggregate variance on columns */
 export type Languages_Variance_Fields = {
-  __typename?: 'languages_variance_fields';
   id?: Maybe<Scalars['Float']['output']>;
 };
 
 /** mutation root */
 export type Mutation_Root = {
-  __typename?: 'mutation_root';
   /** delete data from the table: "languages" */
   delete_languages?: Maybe<Languages_Mutation_Response>;
   /** delete single row from the table: "languages" */
@@ -657,6 +668,11 @@ export type Mutation_RootUpdate_Languages_ManyArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_ProblemsArgs = {
+  _append?: InputMaybe<Problems_Append_Input>;
+  _delete_at_path?: InputMaybe<Problems_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Problems_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Problems_Delete_Key_Input>;
+  _prepend?: InputMaybe<Problems_Prepend_Input>;
   _set?: InputMaybe<Problems_Set_Input>;
   where: Problems_Bool_Exp;
 };
@@ -664,6 +680,11 @@ export type Mutation_RootUpdate_ProblemsArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_Problems_By_PkArgs = {
+  _append?: InputMaybe<Problems_Append_Input>;
+  _delete_at_path?: InputMaybe<Problems_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<Problems_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<Problems_Delete_Key_Input>;
+  _prepend?: InputMaybe<Problems_Prepend_Input>;
   _set?: InputMaybe<Problems_Set_Input>;
   pk_columns: Problems_Pk_Columns_Input;
 };
@@ -789,10 +810,9 @@ export enum Order_By {
 
 /** columns and relationships of "problems" */
 export type Problems = {
-  __typename?: 'problems';
   code: Scalars['String']['output'];
   created_at: Scalars['timestamptz']['output'];
-  description: Scalars['String']['output'];
+  descriptions?: Maybe<Scalars['jsonb']['output']>;
   difficulty: Scalars['String']['output'];
   id: Scalars['uuid']['output'];
   /** An array relationship */
@@ -805,6 +825,12 @@ export type Problems = {
   user_submissions: Array<User_Submissions>;
   /** An aggregate relationship */
   user_submissions_aggregate: User_Submissions_Aggregate;
+};
+
+
+/** columns and relationships of "problems" */
+export type ProblemsDescriptionsArgs = {
+  path?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -849,14 +875,12 @@ export type ProblemsUser_Submissions_AggregateArgs = {
 
 /** aggregated selection of "problems" */
 export type Problems_Aggregate = {
-  __typename?: 'problems_aggregate';
   aggregate?: Maybe<Problems_Aggregate_Fields>;
   nodes: Array<Problems>;
 };
 
 /** aggregate fields of "problems" */
 export type Problems_Aggregate_Fields = {
-  __typename?: 'problems_aggregate_fields';
   count: Scalars['Int']['output'];
   max?: Maybe<Problems_Max_Fields>;
   min?: Maybe<Problems_Min_Fields>;
@@ -869,6 +893,11 @@ export type Problems_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type Problems_Append_Input = {
+  descriptions?: InputMaybe<Scalars['jsonb']['input']>;
+};
+
 /** Boolean expression to filter rows from the table "problems". All fields are combined with a logical 'AND'. */
 export type Problems_Bool_Exp = {
   _and?: InputMaybe<Array<Problems_Bool_Exp>>;
@@ -876,7 +905,7 @@ export type Problems_Bool_Exp = {
   _or?: InputMaybe<Array<Problems_Bool_Exp>>;
   code?: InputMaybe<String_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
-  description?: InputMaybe<String_Comparison_Exp>;
+  descriptions?: InputMaybe<Jsonb_Comparison_Exp>;
   difficulty?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   test_cases?: InputMaybe<Test_Cases_Bool_Exp>;
@@ -893,11 +922,26 @@ export enum Problems_Constraint {
   ProblemsPkey = 'problems_pkey'
 }
 
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type Problems_Delete_At_Path_Input = {
+  descriptions?: InputMaybe<Array<Scalars['String']['input']>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type Problems_Delete_Elem_Input = {
+  descriptions?: InputMaybe<Scalars['Int']['input']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type Problems_Delete_Key_Input = {
+  descriptions?: InputMaybe<Scalars['String']['input']>;
+};
+
 /** input type for inserting data into table "problems" */
 export type Problems_Insert_Input = {
   code?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
+  descriptions?: InputMaybe<Scalars['jsonb']['input']>;
   difficulty?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
   test_cases?: InputMaybe<Test_Cases_Arr_Rel_Insert_Input>;
@@ -908,10 +952,8 @@ export type Problems_Insert_Input = {
 
 /** aggregate max on columns */
 export type Problems_Max_Fields = {
-  __typename?: 'problems_max_fields';
   code?: Maybe<Scalars['String']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
   difficulty?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['uuid']['output']>;
   title?: Maybe<Scalars['String']['output']>;
@@ -920,10 +962,8 @@ export type Problems_Max_Fields = {
 
 /** aggregate min on columns */
 export type Problems_Min_Fields = {
-  __typename?: 'problems_min_fields';
   code?: Maybe<Scalars['String']['output']>;
   created_at?: Maybe<Scalars['timestamptz']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
   difficulty?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['uuid']['output']>;
   title?: Maybe<Scalars['String']['output']>;
@@ -932,7 +972,6 @@ export type Problems_Min_Fields = {
 
 /** response of any mutation on the table "problems" */
 export type Problems_Mutation_Response = {
-  __typename?: 'problems_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
@@ -957,7 +996,7 @@ export type Problems_On_Conflict = {
 export type Problems_Order_By = {
   code?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
-  description?: InputMaybe<Order_By>;
+  descriptions?: InputMaybe<Order_By>;
   difficulty?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   test_cases_aggregate?: InputMaybe<Test_Cases_Aggregate_Order_By>;
@@ -971,6 +1010,11 @@ export type Problems_Pk_Columns_Input = {
   id: Scalars['uuid']['input'];
 };
 
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type Problems_Prepend_Input = {
+  descriptions?: InputMaybe<Scalars['jsonb']['input']>;
+};
+
 /** select columns of table "problems" */
 export enum Problems_Select_Column {
   /** column name */
@@ -978,7 +1022,7 @@ export enum Problems_Select_Column {
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
-  Description = 'description',
+  Descriptions = 'descriptions',
   /** column name */
   Difficulty = 'difficulty',
   /** column name */
@@ -993,7 +1037,7 @@ export enum Problems_Select_Column {
 export type Problems_Set_Input = {
   code?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
+  descriptions?: InputMaybe<Scalars['jsonb']['input']>;
   difficulty?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -1012,7 +1056,7 @@ export type Problems_Stream_Cursor_Input = {
 export type Problems_Stream_Cursor_Value_Input = {
   code?: InputMaybe<Scalars['String']['input']>;
   created_at?: InputMaybe<Scalars['timestamptz']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
+  descriptions?: InputMaybe<Scalars['jsonb']['input']>;
   difficulty?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['uuid']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -1026,7 +1070,7 @@ export enum Problems_Update_Column {
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
-  Description = 'description',
+  Descriptions = 'descriptions',
   /** column name */
   Difficulty = 'difficulty',
   /** column name */
@@ -1038,6 +1082,16 @@ export enum Problems_Update_Column {
 }
 
 export type Problems_Updates = {
+  /** append existing jsonb value of filtered columns with new jsonb value */
+  _append?: InputMaybe<Problems_Append_Input>;
+  /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+  _delete_at_path?: InputMaybe<Problems_Delete_At_Path_Input>;
+  /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+  _delete_elem?: InputMaybe<Problems_Delete_Elem_Input>;
+  /** delete key/value pair or string element. key/value pairs are matched based on their key value */
+  _delete_key?: InputMaybe<Problems_Delete_Key_Input>;
+  /** prepend existing jsonb value of filtered columns with new jsonb value */
+  _prepend?: InputMaybe<Problems_Prepend_Input>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<Problems_Set_Input>;
   /** filter the rows which have to be updated */
@@ -1045,7 +1099,6 @@ export type Problems_Updates = {
 };
 
 export type Query_Root = {
-  __typename?: 'query_root';
   /** fetch data from the table: "languages" */
   languages: Array<Languages>;
   /** fetch aggregated fields from the table: "languages" */
@@ -1225,7 +1278,6 @@ export type Query_RootUsers_By_PkArgs = {
 
 /** columns and relationships of "submissions" */
 export type Submissions = {
-  __typename?: 'submissions';
   additional_files?: Maybe<Scalars['bytea']['output']>;
   callback_url?: Maybe<Scalars['String']['output']>;
   command_line_arguments?: Maybe<Scalars['String']['output']>;
@@ -1288,14 +1340,12 @@ export type SubmissionsUser_Submissions_AggregateArgs = {
 
 /** aggregated selection of "submissions" */
 export type Submissions_Aggregate = {
-  __typename?: 'submissions_aggregate';
   aggregate?: Maybe<Submissions_Aggregate_Fields>;
   nodes: Array<Submissions>;
 };
 
 /** aggregate fields of "submissions" */
 export type Submissions_Aggregate_Fields = {
-  __typename?: 'submissions_aggregate_fields';
   avg?: Maybe<Submissions_Avg_Fields>;
   count: Scalars['Int']['output'];
   max?: Maybe<Submissions_Max_Fields>;
@@ -1318,7 +1368,6 @@ export type Submissions_Aggregate_FieldsCountArgs = {
 
 /** aggregate avg on columns */
 export type Submissions_Avg_Fields = {
-  __typename?: 'submissions_avg_fields';
   cpu_extra_time?: Maybe<Scalars['Float']['output']>;
   cpu_time_limit?: Maybe<Scalars['Float']['output']>;
   exit_code?: Maybe<Scalars['Float']['output']>;
@@ -1449,7 +1498,6 @@ export type Submissions_Insert_Input = {
 
 /** aggregate max on columns */
 export type Submissions_Max_Fields = {
-  __typename?: 'submissions_max_fields';
   callback_url?: Maybe<Scalars['String']['output']>;
   command_line_arguments?: Maybe<Scalars['String']['output']>;
   compile_output?: Maybe<Scalars['String']['output']>;
@@ -1483,7 +1531,6 @@ export type Submissions_Max_Fields = {
 
 /** aggregate min on columns */
 export type Submissions_Min_Fields = {
-  __typename?: 'submissions_min_fields';
   callback_url?: Maybe<Scalars['String']['output']>;
   command_line_arguments?: Maybe<Scalars['String']['output']>;
   compile_output?: Maybe<Scalars['String']['output']>;
@@ -1517,7 +1564,6 @@ export type Submissions_Min_Fields = {
 
 /** response of any mutation on the table "submissions" */
 export type Submissions_Mutation_Response = {
-  __typename?: 'submissions_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
@@ -1694,7 +1740,6 @@ export type Submissions_Set_Input = {
 
 /** aggregate stddev on columns */
 export type Submissions_Stddev_Fields = {
-  __typename?: 'submissions_stddev_fields';
   cpu_extra_time?: Maybe<Scalars['Float']['output']>;
   cpu_time_limit?: Maybe<Scalars['Float']['output']>;
   exit_code?: Maybe<Scalars['Float']['output']>;
@@ -1715,7 +1760,6 @@ export type Submissions_Stddev_Fields = {
 
 /** aggregate stddev_pop on columns */
 export type Submissions_Stddev_Pop_Fields = {
-  __typename?: 'submissions_stddev_pop_fields';
   cpu_extra_time?: Maybe<Scalars['Float']['output']>;
   cpu_time_limit?: Maybe<Scalars['Float']['output']>;
   exit_code?: Maybe<Scalars['Float']['output']>;
@@ -1736,7 +1780,6 @@ export type Submissions_Stddev_Pop_Fields = {
 
 /** aggregate stddev_samp on columns */
 export type Submissions_Stddev_Samp_Fields = {
-  __typename?: 'submissions_stddev_samp_fields';
   cpu_extra_time?: Maybe<Scalars['Float']['output']>;
   cpu_time_limit?: Maybe<Scalars['Float']['output']>;
   exit_code?: Maybe<Scalars['Float']['output']>;
@@ -1803,7 +1846,6 @@ export type Submissions_Stream_Cursor_Value_Input = {
 
 /** aggregate sum on columns */
 export type Submissions_Sum_Fields = {
-  __typename?: 'submissions_sum_fields';
   cpu_extra_time?: Maybe<Scalars['numeric']['output']>;
   cpu_time_limit?: Maybe<Scalars['numeric']['output']>;
   exit_code?: Maybe<Scalars['Int']['output']>;
@@ -1905,7 +1947,6 @@ export type Submissions_Updates = {
 
 /** aggregate var_pop on columns */
 export type Submissions_Var_Pop_Fields = {
-  __typename?: 'submissions_var_pop_fields';
   cpu_extra_time?: Maybe<Scalars['Float']['output']>;
   cpu_time_limit?: Maybe<Scalars['Float']['output']>;
   exit_code?: Maybe<Scalars['Float']['output']>;
@@ -1926,7 +1967,6 @@ export type Submissions_Var_Pop_Fields = {
 
 /** aggregate var_samp on columns */
 export type Submissions_Var_Samp_Fields = {
-  __typename?: 'submissions_var_samp_fields';
   cpu_extra_time?: Maybe<Scalars['Float']['output']>;
   cpu_time_limit?: Maybe<Scalars['Float']['output']>;
   exit_code?: Maybe<Scalars['Float']['output']>;
@@ -1947,7 +1987,6 @@ export type Submissions_Var_Samp_Fields = {
 
 /** aggregate variance on columns */
 export type Submissions_Variance_Fields = {
-  __typename?: 'submissions_variance_fields';
   cpu_extra_time?: Maybe<Scalars['Float']['output']>;
   cpu_time_limit?: Maybe<Scalars['Float']['output']>;
   exit_code?: Maybe<Scalars['Float']['output']>;
@@ -1967,7 +2006,6 @@ export type Submissions_Variance_Fields = {
 };
 
 export type Subscription_Root = {
-  __typename?: 'subscription_root';
   /** fetch data from the table: "languages" */
   languages: Array<Languages>;
   /** fetch aggregated fields from the table: "languages" */
@@ -2200,7 +2238,6 @@ export type Subscription_RootUsers_StreamArgs = {
 
 /** columns and relationships of "test_cases" */
 export type Test_Cases = {
-  __typename?: 'test_cases';
   expected_output: Scalars['String']['output'];
   id: Scalars['uuid']['output'];
   input: Scalars['String']['output'];
@@ -2212,7 +2249,6 @@ export type Test_Cases = {
 
 /** aggregated selection of "test_cases" */
 export type Test_Cases_Aggregate = {
-  __typename?: 'test_cases_aggregate';
   aggregate?: Maybe<Test_Cases_Aggregate_Fields>;
   nodes: Array<Test_Cases>;
 };
@@ -2246,7 +2282,6 @@ export type Test_Cases_Aggregate_Bool_Exp_Count = {
 
 /** aggregate fields of "test_cases" */
 export type Test_Cases_Aggregate_Fields = {
-  __typename?: 'test_cases_aggregate_fields';
   count: Scalars['Int']['output'];
   max?: Maybe<Test_Cases_Max_Fields>;
   min?: Maybe<Test_Cases_Min_Fields>;
@@ -2304,7 +2339,6 @@ export type Test_Cases_Insert_Input = {
 
 /** aggregate max on columns */
 export type Test_Cases_Max_Fields = {
-  __typename?: 'test_cases_max_fields';
   expected_output?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['uuid']['output']>;
   input?: Maybe<Scalars['String']['output']>;
@@ -2321,7 +2355,6 @@ export type Test_Cases_Max_Order_By = {
 
 /** aggregate min on columns */
 export type Test_Cases_Min_Fields = {
-  __typename?: 'test_cases_min_fields';
   expected_output?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['uuid']['output']>;
   input?: Maybe<Scalars['String']['output']>;
@@ -2338,7 +2371,6 @@ export type Test_Cases_Min_Order_By = {
 
 /** response of any mutation on the table "test_cases" */
 export type Test_Cases_Mutation_Response = {
-  __typename?: 'test_cases_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
@@ -2468,7 +2500,6 @@ export type Timestamptz_Comparison_Exp = {
 
 /** columns and relationships of "user_submissions" */
 export type User_Submissions = {
-  __typename?: 'user_submissions';
   id: Scalars['uuid']['output'];
   /** An object relationship */
   problem: Problems;
@@ -2485,7 +2516,6 @@ export type User_Submissions = {
 
 /** aggregated selection of "user_submissions" */
 export type User_Submissions_Aggregate = {
-  __typename?: 'user_submissions_aggregate';
   aggregate?: Maybe<User_Submissions_Aggregate_Fields>;
   nodes: Array<User_Submissions>;
 };
@@ -2503,7 +2533,6 @@ export type User_Submissions_Aggregate_Bool_Exp_Count = {
 
 /** aggregate fields of "user_submissions" */
 export type User_Submissions_Aggregate_Fields = {
-  __typename?: 'user_submissions_aggregate_fields';
   avg?: Maybe<User_Submissions_Avg_Fields>;
   count: Scalars['Int']['output'];
   max?: Maybe<User_Submissions_Max_Fields>;
@@ -2548,7 +2577,6 @@ export type User_Submissions_Arr_Rel_Insert_Input = {
 
 /** aggregate avg on columns */
 export type User_Submissions_Avg_Fields = {
-  __typename?: 'user_submissions_avg_fields';
   submission_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -2599,7 +2627,6 @@ export type User_Submissions_Insert_Input = {
 
 /** aggregate max on columns */
 export type User_Submissions_Max_Fields = {
-  __typename?: 'user_submissions_max_fields';
   id?: Maybe<Scalars['uuid']['output']>;
   problem_id?: Maybe<Scalars['uuid']['output']>;
   raw_submission?: Maybe<Scalars['String']['output']>;
@@ -2620,7 +2647,6 @@ export type User_Submissions_Max_Order_By = {
 
 /** aggregate min on columns */
 export type User_Submissions_Min_Fields = {
-  __typename?: 'user_submissions_min_fields';
   id?: Maybe<Scalars['uuid']['output']>;
   problem_id?: Maybe<Scalars['uuid']['output']>;
   raw_submission?: Maybe<Scalars['String']['output']>;
@@ -2641,7 +2667,6 @@ export type User_Submissions_Min_Order_By = {
 
 /** response of any mutation on the table "user_submissions" */
 export type User_Submissions_Mutation_Response = {
-  __typename?: 'user_submissions_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
@@ -2701,7 +2726,6 @@ export type User_Submissions_Set_Input = {
 
 /** aggregate stddev on columns */
 export type User_Submissions_Stddev_Fields = {
-  __typename?: 'user_submissions_stddev_fields';
   submission_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -2712,7 +2736,6 @@ export type User_Submissions_Stddev_Order_By = {
 
 /** aggregate stddev_pop on columns */
 export type User_Submissions_Stddev_Pop_Fields = {
-  __typename?: 'user_submissions_stddev_pop_fields';
   submission_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -2723,7 +2746,6 @@ export type User_Submissions_Stddev_Pop_Order_By = {
 
 /** aggregate stddev_samp on columns */
 export type User_Submissions_Stddev_Samp_Fields = {
-  __typename?: 'user_submissions_stddev_samp_fields';
   submission_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -2752,7 +2774,6 @@ export type User_Submissions_Stream_Cursor_Value_Input = {
 
 /** aggregate sum on columns */
 export type User_Submissions_Sum_Fields = {
-  __typename?: 'user_submissions_sum_fields';
   submission_id?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -2788,7 +2809,6 @@ export type User_Submissions_Updates = {
 
 /** aggregate var_pop on columns */
 export type User_Submissions_Var_Pop_Fields = {
-  __typename?: 'user_submissions_var_pop_fields';
   submission_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -2799,7 +2819,6 @@ export type User_Submissions_Var_Pop_Order_By = {
 
 /** aggregate var_samp on columns */
 export type User_Submissions_Var_Samp_Fields = {
-  __typename?: 'user_submissions_var_samp_fields';
   submission_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -2810,7 +2829,6 @@ export type User_Submissions_Var_Samp_Order_By = {
 
 /** aggregate variance on columns */
 export type User_Submissions_Variance_Fields = {
-  __typename?: 'user_submissions_variance_fields';
   submission_id?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -2821,7 +2839,6 @@ export type User_Submissions_Variance_Order_By = {
 
 /** columns and relationships of "users" */
 export type Users = {
-  __typename?: 'users';
   created_at: Scalars['timestamptz']['output'];
   display_name: Scalars['String']['output'];
   email: Scalars['String']['output'];
@@ -2857,14 +2874,12 @@ export type UsersUser_Submissions_AggregateArgs = {
 
 /** aggregated selection of "users" */
 export type Users_Aggregate = {
-  __typename?: 'users_aggregate';
   aggregate?: Maybe<Users_Aggregate_Fields>;
   nodes: Array<Users>;
 };
 
 /** aggregate fields of "users" */
 export type Users_Aggregate_Fields = {
-  __typename?: 'users_aggregate_fields';
   count: Scalars['Int']['output'];
   max?: Maybe<Users_Max_Fields>;
   min?: Maybe<Users_Min_Fields>;
@@ -2915,7 +2930,6 @@ export type Users_Insert_Input = {
 
 /** aggregate max on columns */
 export type Users_Max_Fields = {
-  __typename?: 'users_max_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   display_name?: Maybe<Scalars['String']['output']>;
   email?: Maybe<Scalars['String']['output']>;
@@ -2927,7 +2941,6 @@ export type Users_Max_Fields = {
 
 /** aggregate min on columns */
 export type Users_Min_Fields = {
-  __typename?: 'users_min_fields';
   created_at?: Maybe<Scalars['timestamptz']['output']>;
   display_name?: Maybe<Scalars['String']['output']>;
   email?: Maybe<Scalars['String']['output']>;
@@ -2939,7 +2952,6 @@ export type Users_Min_Fields = {
 
 /** response of any mutation on the table "users" */
 export type Users_Mutation_Response = {
-  __typename?: 'users_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int']['output'];
   /** data from the rows affected by the mutation */
@@ -3066,21 +3078,60 @@ export type Uuid_Comparison_Exp = {
 export type GetMeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetMeQuery = { __typename?: 'query_root', me: { __typename?: 'Me', id: string, email: string, role: string, display_name: string } };
+export type GetMeQuery = { me: { id: string, email: string, role: string, display_name: string } };
 
 export type SignUpMutationVariables = Exact<{
   form: SignUpInput;
 }>;
 
 
-export type SignUpMutation = { __typename?: 'mutation_root', sign_up?: { __typename?: 'SignUpOutPut', code: string } | null };
+export type SignUpMutation = { sign_up?: { code: string } | null };
 
 export type SyncSocialAccountMutationVariables = Exact<{
   form: SyncSocialAccountInput;
 }>;
 
 
-export type SyncSocialAccountMutation = { __typename?: 'mutation_root', sync_social_account?: { __typename?: 'MessageResponse', message: string } | null };
+export type SyncSocialAccountMutation = { sync_social_account?: { message: string } | null };
+
+export type GetProblemsQueryVariables = Exact<{
+  where?: InputMaybe<Problems_Bool_Exp>;
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Problems_Order_By> | Problems_Order_By>;
+}>;
+
+
+export type GetProblemsQuery = { problems: Array<{ id: any, title: string, code: string, difficulty: string, created_at: any }> };
+
+export type GetProblemPaginationQueryVariables = Exact<{
+  where?: InputMaybe<Problems_Bool_Exp>;
+}>;
+
+
+export type GetProblemPaginationQuery = { pagination: { aggregate?: { count: number } | null } };
+
+export type GetProblemByPkQueryVariables = Exact<{
+  id: Scalars['uuid']['input'];
+}>;
+
+
+export type GetProblemByPkQuery = { problem?: { id: any, code: string, title: string, difficulty: string, descriptions?: any | null, test_cases: Array<{ id: any, input: string, expected_output: string, is_sample: boolean }> } | null };
+
+export type CreateProblemMutationVariables = Exact<{
+  object: Problems_Insert_Input;
+}>;
+
+
+export type CreateProblemMutation = { insert_problems_one?: { id: any } | null };
+
+export type UpdateProblemByPkMutationVariables = Exact<{
+  id: Scalars['uuid']['input'];
+  form: Problems_Set_Input;
+}>;
+
+
+export type UpdateProblemByPkMutation = { update_problems_by_pk?: { id: any } | null };
 
 
 export const GetMeDocument = gql`
@@ -3132,7 +3183,6 @@ export const SignUpDocument = gql`
   }
 }
     `;
-export type SignUpMutationFn = Apollo.MutationFunction<SignUpMutation, SignUpMutationVariables>;
 
 /**
  * __useSignUpMutation__
@@ -3165,7 +3215,6 @@ export const SyncSocialAccountDocument = gql`
   }
 }
     `;
-export type SyncSocialAccountMutationFn = Apollo.MutationFunction<SyncSocialAccountMutation, SyncSocialAccountMutationVariables>;
 
 /**
  * __useSyncSocialAccountMutation__
@@ -3191,3 +3240,207 @@ export function useSyncSocialAccountMutation(baseOptions?: Apollo.MutationHookOp
 export type SyncSocialAccountMutationHookResult = ReturnType<typeof useSyncSocialAccountMutation>;
 export type SyncSocialAccountMutationResult = Apollo.MutationResult<SyncSocialAccountMutation>;
 export type SyncSocialAccountMutationOptions = Apollo.BaseMutationOptions<SyncSocialAccountMutation, SyncSocialAccountMutationVariables>;
+export const GetProblemsDocument = gql`
+    query GetProblems($where: problems_bool_exp, $limit: Int, $offset: Int, $orderBy: [problems_order_by!]) {
+  problems(where: $where, limit: $limit, offset: $offset, order_by: $orderBy) {
+    id
+    title
+    code
+    difficulty
+    created_at
+  }
+}
+    `;
+
+/**
+ * __useGetProblemsQuery__
+ *
+ * To run a query within a React component, call `useGetProblemsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProblemsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProblemsQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      orderBy: // value for 'orderBy'
+ *   },
+ * });
+ */
+export function useGetProblemsQuery(baseOptions?: Apollo.QueryHookOptions<GetProblemsQuery, GetProblemsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetProblemsQuery, GetProblemsQueryVariables>(GetProblemsDocument, options);
+      }
+export function useGetProblemsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProblemsQuery, GetProblemsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetProblemsQuery, GetProblemsQueryVariables>(GetProblemsDocument, options);
+        }
+export function useGetProblemsSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetProblemsQuery, GetProblemsQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetProblemsQuery, GetProblemsQueryVariables>(GetProblemsDocument, options);
+        }
+export type GetProblemsQueryHookResult = ReturnType<typeof useGetProblemsQuery>;
+export type GetProblemsLazyQueryHookResult = ReturnType<typeof useGetProblemsLazyQuery>;
+export type GetProblemsSuspenseQueryHookResult = ReturnType<typeof useGetProblemsSuspenseQuery>;
+export type GetProblemsQueryResult = Apollo.QueryResult<GetProblemsQuery, GetProblemsQueryVariables>;
+export const GetProblemPaginationDocument = gql`
+    query GetProblemPagination($where: problems_bool_exp) {
+  pagination: problems_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetProblemPaginationQuery__
+ *
+ * To run a query within a React component, call `useGetProblemPaginationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProblemPaginationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProblemPaginationQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useGetProblemPaginationQuery(baseOptions?: Apollo.QueryHookOptions<GetProblemPaginationQuery, GetProblemPaginationQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetProblemPaginationQuery, GetProblemPaginationQueryVariables>(GetProblemPaginationDocument, options);
+      }
+export function useGetProblemPaginationLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProblemPaginationQuery, GetProblemPaginationQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetProblemPaginationQuery, GetProblemPaginationQueryVariables>(GetProblemPaginationDocument, options);
+        }
+export function useGetProblemPaginationSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetProblemPaginationQuery, GetProblemPaginationQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetProblemPaginationQuery, GetProblemPaginationQueryVariables>(GetProblemPaginationDocument, options);
+        }
+export type GetProblemPaginationQueryHookResult = ReturnType<typeof useGetProblemPaginationQuery>;
+export type GetProblemPaginationLazyQueryHookResult = ReturnType<typeof useGetProblemPaginationLazyQuery>;
+export type GetProblemPaginationSuspenseQueryHookResult = ReturnType<typeof useGetProblemPaginationSuspenseQuery>;
+export type GetProblemPaginationQueryResult = Apollo.QueryResult<GetProblemPaginationQuery, GetProblemPaginationQueryVariables>;
+export const GetProblemByPkDocument = gql`
+    query GetProblemByPk($id: uuid!) {
+  problem: problems_by_pk(id: $id) {
+    id
+    code
+    title
+    difficulty
+    descriptions
+    test_cases {
+      id
+      input
+      expected_output
+      is_sample
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetProblemByPkQuery__
+ *
+ * To run a query within a React component, call `useGetProblemByPkQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProblemByPkQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProblemByPkQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetProblemByPkQuery(baseOptions: Apollo.QueryHookOptions<GetProblemByPkQuery, GetProblemByPkQueryVariables> & ({ variables: GetProblemByPkQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetProblemByPkQuery, GetProblemByPkQueryVariables>(GetProblemByPkDocument, options);
+      }
+export function useGetProblemByPkLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProblemByPkQuery, GetProblemByPkQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetProblemByPkQuery, GetProblemByPkQueryVariables>(GetProblemByPkDocument, options);
+        }
+export function useGetProblemByPkSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetProblemByPkQuery, GetProblemByPkQueryVariables>) {
+          const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
+          return Apollo.useSuspenseQuery<GetProblemByPkQuery, GetProblemByPkQueryVariables>(GetProblemByPkDocument, options);
+        }
+export type GetProblemByPkQueryHookResult = ReturnType<typeof useGetProblemByPkQuery>;
+export type GetProblemByPkLazyQueryHookResult = ReturnType<typeof useGetProblemByPkLazyQuery>;
+export type GetProblemByPkSuspenseQueryHookResult = ReturnType<typeof useGetProblemByPkSuspenseQuery>;
+export type GetProblemByPkQueryResult = Apollo.QueryResult<GetProblemByPkQuery, GetProblemByPkQueryVariables>;
+export const CreateProblemDocument = gql`
+    mutation CreateProblem($object: problems_insert_input!) {
+  insert_problems_one(object: $object) {
+    id
+  }
+}
+    `;
+
+/**
+ * __useCreateProblemMutation__
+ *
+ * To run a mutation, you first call `useCreateProblemMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateProblemMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createProblemMutation, { data, loading, error }] = useCreateProblemMutation({
+ *   variables: {
+ *      object: // value for 'object'
+ *   },
+ * });
+ */
+export function useCreateProblemMutation(baseOptions?: Apollo.MutationHookOptions<CreateProblemMutation, CreateProblemMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateProblemMutation, CreateProblemMutationVariables>(CreateProblemDocument, options);
+      }
+export type CreateProblemMutationHookResult = ReturnType<typeof useCreateProblemMutation>;
+export type CreateProblemMutationResult = Apollo.MutationResult<CreateProblemMutation>;
+export type CreateProblemMutationOptions = Apollo.BaseMutationOptions<CreateProblemMutation, CreateProblemMutationVariables>;
+export const UpdateProblemByPkDocument = gql`
+    mutation UpdateProblemByPk($id: uuid!, $form: problems_set_input!) {
+  update_problems_by_pk(pk_columns: {id: $id}, _set: $form) {
+    id
+  }
+}
+    `;
+
+/**
+ * __useUpdateProblemByPkMutation__
+ *
+ * To run a mutation, you first call `useUpdateProblemByPkMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateProblemByPkMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateProblemByPkMutation, { data, loading, error }] = useUpdateProblemByPkMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      form: // value for 'form'
+ *   },
+ * });
+ */
+export function useUpdateProblemByPkMutation(baseOptions?: Apollo.MutationHookOptions<UpdateProblemByPkMutation, UpdateProblemByPkMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateProblemByPkMutation, UpdateProblemByPkMutationVariables>(UpdateProblemByPkDocument, options);
+      }
+export type UpdateProblemByPkMutationHookResult = ReturnType<typeof useUpdateProblemByPkMutation>;
+export type UpdateProblemByPkMutationResult = Apollo.MutationResult<UpdateProblemByPkMutation>;
+export type UpdateProblemByPkMutationOptions = Apollo.BaseMutationOptions<UpdateProblemByPkMutation, UpdateProblemByPkMutationVariables>;

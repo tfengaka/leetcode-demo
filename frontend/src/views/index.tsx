@@ -11,14 +11,14 @@ export default function AppView() {
   const { client } = useApolloWithAuth();
   return (
     <ApolloProvider client={client}>
-      <ThemeProvider>
-        <NavigationProgress />
-        <AuthProvider>
+      <AuthProvider>
+        <ThemeProvider>
+          <NavigationProgress />
           <Outlet />
-        </AuthProvider>
-        <Toaster richColors duration={3000} />
-        {process.env.NODE_ENV === 'development' && <TanStackRouterDevtools position="bottom-right" />}
-      </ThemeProvider>
+          <Toaster richColors duration={3000} />
+          {process.env.NODE_ENV === 'development' && <TanStackRouterDevtools position="bottom-right" />}
+        </ThemeProvider>
+      </AuthProvider>
     </ApolloProvider>
   );
 }

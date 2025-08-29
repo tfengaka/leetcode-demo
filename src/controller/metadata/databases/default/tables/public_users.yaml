@@ -10,27 +10,17 @@ array_relationships:
           name: user_submissions
           schema: public
 select_permissions:
-  - role: student
-    permission:
-      columns:
-        - display_name
-        - email
-        - id
-      filter:
-        role:
-          _eq: student
-    comment: ""
   - role: teacher
     permission:
       columns:
-        - email
-        - display_name
         - created_at
-        - updated_at
+        - display_name
+        - email
         - id
-      filter:
-        role:
-          _eq: student
+        - provider
+        - role
+        - updated_at
+      filter: {}
       allow_aggregations: true
     comment: ""
 update_permissions:

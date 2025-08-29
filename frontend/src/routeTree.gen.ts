@@ -14,12 +14,20 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as ManageRouteImport } from './routes/manage/route'
 import { Route as AuthRouteImport } from './routes/_auth/route'
 import { Route as IndexImport } from './routes/index'
+import { Route as ManageIndexImport } from './routes/manage/index'
 import { Route as AuthSignUpImport } from './routes/_auth/sign-up'
 import { Route as AuthSignInImport } from './routes/_auth/sign-in'
+import { Route as errors503Import } from './routes/(errors)/503'
+import { Route as errors500Import } from './routes/(errors)/500'
+import { Route as errors404Import } from './routes/(errors)/404'
+import { Route as errors403Import } from './routes/(errors)/403'
+import { Route as errors401Import } from './routes/(errors)/401'
 import { Route as ManageUsersIndexImport } from './routes/manage/users/index'
 import { Route as ManageSubmissionsIndexImport } from './routes/manage/submissions/index'
 import { Route as ManageProblemsIndexImport } from './routes/manage/problems/index'
 import { Route as ManageDashboardIndexImport } from './routes/manage/dashboard/index'
+import { Route as ManageProblemsCreateImport } from './routes/manage/problems/create'
+import { Route as ManageProblemsIdImport } from './routes/manage/problems/$id'
 
 // Create/Update Routes
 
@@ -40,6 +48,12 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const ManageIndexRoute = ManageIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ManageRouteRoute,
+} as any)
+
 const AuthSignUpRoute = AuthSignUpImport.update({
   id: '/sign-up',
   path: '/sign-up',
@@ -50,6 +64,36 @@ const AuthSignInRoute = AuthSignInImport.update({
   id: '/sign-in',
   path: '/sign-in',
   getParentRoute: () => AuthRouteRoute,
+} as any)
+
+const errors503Route = errors503Import.update({
+  id: '/(errors)/503',
+  path: '/503',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const errors500Route = errors500Import.update({
+  id: '/(errors)/500',
+  path: '/500',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const errors404Route = errors404Import.update({
+  id: '/(errors)/404',
+  path: '/404',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const errors403Route = errors403Import.update({
+  id: '/(errors)/403',
+  path: '/403',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const errors401Route = errors401Import.update({
+  id: '/(errors)/401',
+  path: '/401',
+  getParentRoute: () => rootRoute,
 } as any)
 
 const ManageUsersIndexRoute = ManageUsersIndexImport.update({
@@ -73,6 +117,18 @@ const ManageProblemsIndexRoute = ManageProblemsIndexImport.update({
 const ManageDashboardIndexRoute = ManageDashboardIndexImport.update({
   id: '/dashboard/',
   path: '/dashboard/',
+  getParentRoute: () => ManageRouteRoute,
+} as any)
+
+const ManageProblemsCreateRoute = ManageProblemsCreateImport.update({
+  id: '/problems/create',
+  path: '/problems/create',
+  getParentRoute: () => ManageRouteRoute,
+} as any)
+
+const ManageProblemsIdRoute = ManageProblemsIdImport.update({
+  id: '/problems/$id',
+  path: '/problems/$id',
   getParentRoute: () => ManageRouteRoute,
 } as any)
 
@@ -101,6 +157,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ManageRouteImport
       parentRoute: typeof rootRoute
     }
+    '/(errors)/401': {
+      id: '/(errors)/401'
+      path: '/401'
+      fullPath: '/401'
+      preLoaderRoute: typeof errors401Import
+      parentRoute: typeof rootRoute
+    }
+    '/(errors)/403': {
+      id: '/(errors)/403'
+      path: '/403'
+      fullPath: '/403'
+      preLoaderRoute: typeof errors403Import
+      parentRoute: typeof rootRoute
+    }
+    '/(errors)/404': {
+      id: '/(errors)/404'
+      path: '/404'
+      fullPath: '/404'
+      preLoaderRoute: typeof errors404Import
+      parentRoute: typeof rootRoute
+    }
+    '/(errors)/500': {
+      id: '/(errors)/500'
+      path: '/500'
+      fullPath: '/500'
+      preLoaderRoute: typeof errors500Import
+      parentRoute: typeof rootRoute
+    }
+    '/(errors)/503': {
+      id: '/(errors)/503'
+      path: '/503'
+      fullPath: '/503'
+      preLoaderRoute: typeof errors503Import
+      parentRoute: typeof rootRoute
+    }
     '/_auth/sign-in': {
       id: '/_auth/sign-in'
       path: '/sign-in'
@@ -114,6 +205,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/sign-up'
       preLoaderRoute: typeof AuthSignUpImport
       parentRoute: typeof AuthRouteImport
+    }
+    '/manage/': {
+      id: '/manage/'
+      path: '/'
+      fullPath: '/manage/'
+      preLoaderRoute: typeof ManageIndexImport
+      parentRoute: typeof ManageRouteImport
+    }
+    '/manage/problems/$id': {
+      id: '/manage/problems/$id'
+      path: '/problems/$id'
+      fullPath: '/manage/problems/$id'
+      preLoaderRoute: typeof ManageProblemsIdImport
+      parentRoute: typeof ManageRouteImport
+    }
+    '/manage/problems/create': {
+      id: '/manage/problems/create'
+      path: '/problems/create'
+      fullPath: '/manage/problems/create'
+      preLoaderRoute: typeof ManageProblemsCreateImport
+      parentRoute: typeof ManageRouteImport
     }
     '/manage/dashboard/': {
       id: '/manage/dashboard/'
@@ -163,6 +275,9 @@ const AuthRouteRouteWithChildren = AuthRouteRoute._addFileChildren(
 )
 
 interface ManageRouteRouteChildren {
+  ManageIndexRoute: typeof ManageIndexRoute
+  ManageProblemsIdRoute: typeof ManageProblemsIdRoute
+  ManageProblemsCreateRoute: typeof ManageProblemsCreateRoute
   ManageDashboardIndexRoute: typeof ManageDashboardIndexRoute
   ManageProblemsIndexRoute: typeof ManageProblemsIndexRoute
   ManageSubmissionsIndexRoute: typeof ManageSubmissionsIndexRoute
@@ -170,6 +285,9 @@ interface ManageRouteRouteChildren {
 }
 
 const ManageRouteRouteChildren: ManageRouteRouteChildren = {
+  ManageIndexRoute: ManageIndexRoute,
+  ManageProblemsIdRoute: ManageProblemsIdRoute,
+  ManageProblemsCreateRoute: ManageProblemsCreateRoute,
   ManageDashboardIndexRoute: ManageDashboardIndexRoute,
   ManageProblemsIndexRoute: ManageProblemsIndexRoute,
   ManageSubmissionsIndexRoute: ManageSubmissionsIndexRoute,
@@ -184,8 +302,16 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '': typeof AuthRouteRouteWithChildren
   '/manage': typeof ManageRouteRouteWithChildren
+  '/401': typeof errors401Route
+  '/403': typeof errors403Route
+  '/404': typeof errors404Route
+  '/500': typeof errors500Route
+  '/503': typeof errors503Route
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
+  '/manage/': typeof ManageIndexRoute
+  '/manage/problems/$id': typeof ManageProblemsIdRoute
+  '/manage/problems/create': typeof ManageProblemsCreateRoute
   '/manage/dashboard': typeof ManageDashboardIndexRoute
   '/manage/problems': typeof ManageProblemsIndexRoute
   '/manage/submissions': typeof ManageSubmissionsIndexRoute
@@ -195,9 +321,16 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '': typeof AuthRouteRouteWithChildren
-  '/manage': typeof ManageRouteRouteWithChildren
+  '/401': typeof errors401Route
+  '/403': typeof errors403Route
+  '/404': typeof errors404Route
+  '/500': typeof errors500Route
+  '/503': typeof errors503Route
   '/sign-in': typeof AuthSignInRoute
   '/sign-up': typeof AuthSignUpRoute
+  '/manage': typeof ManageIndexRoute
+  '/manage/problems/$id': typeof ManageProblemsIdRoute
+  '/manage/problems/create': typeof ManageProblemsCreateRoute
   '/manage/dashboard': typeof ManageDashboardIndexRoute
   '/manage/problems': typeof ManageProblemsIndexRoute
   '/manage/submissions': typeof ManageSubmissionsIndexRoute
@@ -209,8 +342,16 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteRouteWithChildren
   '/manage': typeof ManageRouteRouteWithChildren
+  '/(errors)/401': typeof errors401Route
+  '/(errors)/403': typeof errors403Route
+  '/(errors)/404': typeof errors404Route
+  '/(errors)/500': typeof errors500Route
+  '/(errors)/503': typeof errors503Route
   '/_auth/sign-in': typeof AuthSignInRoute
   '/_auth/sign-up': typeof AuthSignUpRoute
+  '/manage/': typeof ManageIndexRoute
+  '/manage/problems/$id': typeof ManageProblemsIdRoute
+  '/manage/problems/create': typeof ManageProblemsCreateRoute
   '/manage/dashboard/': typeof ManageDashboardIndexRoute
   '/manage/problems/': typeof ManageProblemsIndexRoute
   '/manage/submissions/': typeof ManageSubmissionsIndexRoute
@@ -223,8 +364,16 @@ export interface FileRouteTypes {
     | '/'
     | ''
     | '/manage'
+    | '/401'
+    | '/403'
+    | '/404'
+    | '/500'
+    | '/503'
     | '/sign-in'
     | '/sign-up'
+    | '/manage/'
+    | '/manage/problems/$id'
+    | '/manage/problems/create'
     | '/manage/dashboard'
     | '/manage/problems'
     | '/manage/submissions'
@@ -233,9 +382,16 @@ export interface FileRouteTypes {
   to:
     | '/'
     | ''
-    | '/manage'
+    | '/401'
+    | '/403'
+    | '/404'
+    | '/500'
+    | '/503'
     | '/sign-in'
     | '/sign-up'
+    | '/manage'
+    | '/manage/problems/$id'
+    | '/manage/problems/create'
     | '/manage/dashboard'
     | '/manage/problems'
     | '/manage/submissions'
@@ -245,8 +401,16 @@ export interface FileRouteTypes {
     | '/'
     | '/_auth'
     | '/manage'
+    | '/(errors)/401'
+    | '/(errors)/403'
+    | '/(errors)/404'
+    | '/(errors)/500'
+    | '/(errors)/503'
     | '/_auth/sign-in'
     | '/_auth/sign-up'
+    | '/manage/'
+    | '/manage/problems/$id'
+    | '/manage/problems/create'
     | '/manage/dashboard/'
     | '/manage/problems/'
     | '/manage/submissions/'
@@ -258,12 +422,22 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRouteRoute: typeof AuthRouteRouteWithChildren
   ManageRouteRoute: typeof ManageRouteRouteWithChildren
+  errors401Route: typeof errors401Route
+  errors403Route: typeof errors403Route
+  errors404Route: typeof errors404Route
+  errors500Route: typeof errors500Route
+  errors503Route: typeof errors503Route
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRouteRoute: AuthRouteRouteWithChildren,
   ManageRouteRoute: ManageRouteRouteWithChildren,
+  errors401Route: errors401Route,
+  errors403Route: errors403Route,
+  errors404Route: errors404Route,
+  errors500Route: errors500Route,
+  errors503Route: errors503Route,
 }
 
 export const routeTree = rootRoute
@@ -278,7 +452,12 @@ export const routeTree = rootRoute
       "children": [
         "/",
         "/_auth",
-        "/manage"
+        "/manage",
+        "/(errors)/401",
+        "/(errors)/403",
+        "/(errors)/404",
+        "/(errors)/500",
+        "/(errors)/503"
       ]
     },
     "/": {
@@ -294,11 +473,29 @@ export const routeTree = rootRoute
     "/manage": {
       "filePath": "manage/route.tsx",
       "children": [
+        "/manage/",
+        "/manage/problems/$id",
+        "/manage/problems/create",
         "/manage/dashboard/",
         "/manage/problems/",
         "/manage/submissions/",
         "/manage/users/"
       ]
+    },
+    "/(errors)/401": {
+      "filePath": "(errors)/401.tsx"
+    },
+    "/(errors)/403": {
+      "filePath": "(errors)/403.tsx"
+    },
+    "/(errors)/404": {
+      "filePath": "(errors)/404.tsx"
+    },
+    "/(errors)/500": {
+      "filePath": "(errors)/500.tsx"
+    },
+    "/(errors)/503": {
+      "filePath": "(errors)/503.tsx"
     },
     "/_auth/sign-in": {
       "filePath": "_auth/sign-in.tsx",
@@ -307,6 +504,18 @@ export const routeTree = rootRoute
     "/_auth/sign-up": {
       "filePath": "_auth/sign-up.tsx",
       "parent": "/_auth"
+    },
+    "/manage/": {
+      "filePath": "manage/index.tsx",
+      "parent": "/manage"
+    },
+    "/manage/problems/$id": {
+      "filePath": "manage/problems/$id.tsx",
+      "parent": "/manage"
+    },
+    "/manage/problems/create": {
+      "filePath": "manage/problems/create.tsx",
+      "parent": "/manage"
     },
     "/manage/dashboard/": {
       "filePath": "manage/dashboard/index.tsx",
